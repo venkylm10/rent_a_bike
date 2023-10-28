@@ -17,6 +17,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: MyColors.backgroundColor,
       appBar: customAppBar('Check Out'),
       body: SingleChildScrollView(

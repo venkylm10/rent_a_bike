@@ -27,9 +27,12 @@ class CustomBackButton extends StatelessWidget {
                   )),
             ),
           ),
-          Align(
+          const Align(
             alignment: Alignment.center,
-            child: const Icon(Icons.arrow_back_rounded),
+            child: Icon(
+              Icons.arrow_back_rounded,
+              color: MyColors.blackColor,
+            ),
           )
         ],
       ),

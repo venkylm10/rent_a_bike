@@ -44,33 +44,64 @@ class _HomePageState extends State<HomePage> {
         items: [
           BottomNavigationBarItem(
             label: 'home',
-            icon: Image.asset(
-              Assets.home,
-              height: 30,
+            icon: Column(
+              children: [
+                Image.asset(
+                  Assets.home,
+                  height: 30,
+                ),
+                if (currentIndex == 0) tabIndicator(),
+              ],
             ),
           ),
           BottomNavigationBarItem(
             label: 'map',
-            icon: Image.asset(
-              Assets.map,
-              height: 30,
+            icon: Column(
+              children: [
+                Image.asset(
+                  Assets.map,
+                  height: 30,
+                ),
+                if (currentIndex == 1) tabIndicator(),
+              ],
             ),
           ),
           BottomNavigationBarItem(
             label: 'wallet',
-            icon: Image.asset(
-              Assets.wallet,
-              height: 30,
+            icon: Column(
+              children: [
+                Image.asset(
+                  Assets.wallet,
+                  height: 30,
+                ),
+                if (currentIndex == 2) tabIndicator(),
+              ],
             ),
           ),
           BottomNavigationBarItem(
             label: 'settings',
-            icon: Image.asset(
-              Assets.settings,
-              height: 30,
+            icon: Column(
+              children: [
+                Image.asset(
+                  Assets.settings,
+                  height: 30,
+                ),
+                if (currentIndex == 3) tabIndicator(),
+              ],
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Container tabIndicator() {
+    return Container(
+      height: 3,
+      width: 10,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(1.5),
+        color: MyColors.blackColor,
       ),
     );
   }

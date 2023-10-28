@@ -6,6 +6,7 @@ import 'package:rent_a_bike/widgets/global/back_button.dart';
 AppBar customAppBar(String title) {
   return AppBar(
     backgroundColor: MyColors.backgroundColor,
+    elevation: 0,
     leading: const CustomBackButton(),
     title: Expanded(
       child: Container(

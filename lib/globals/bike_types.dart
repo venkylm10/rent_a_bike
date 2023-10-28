@@ -4,7 +4,7 @@ final bikeTypeProvider =
     StateNotifierProvider<BikeTypes, int>((ref) => BikeTypes());
 
 class BikeTypes extends StateNotifier<int> {
-  BikeTypes() : super(0);
+  BikeTypes() : super(1);
   final bikeTypes = [
     'Adventure',
     'Cruiser',
