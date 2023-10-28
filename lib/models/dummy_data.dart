@@ -11,6 +11,8 @@
 //   );
 // }
 
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 final List<Map<String, dynamic>> bikes = [
   {
     'series': 'Meteore',
@@ -118,3 +120,32 @@ final List<Map<String, dynamic>> recentBikes = [
     'available': false,
   },
 ];
+
+final List<Map<String, dynamic>> itemList = [
+  {
+    'name': 'Riding Jacket',
+    'rent': 800,
+    'added': true,
+    'image': 'assets/images/items/riding_jacket.png',
+  },
+  {
+    'name': 'Riding Jacket',
+    'rent': 800,
+    'added': false,
+    'image': 'assets/images/items/riding_gloves.png',
+  },
+  {
+    'name': 'Riding Jacket',
+    'rent': 800,
+    'added': true,
+    'image': 'assets/images/items/helmet.png',
+  },
+  {
+    'name': 'Riding Jacket',
+    'rent': 800,
+    'added': false,
+    'image': 'assets/images/items/riding_jacket.png',
+  },
+];
+
+final itemsProvider = Provider((ref) => itemList);

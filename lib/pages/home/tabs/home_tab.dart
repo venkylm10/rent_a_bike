@@ -7,6 +7,7 @@ import 'package:rent_a_bike/constants/styles.dart';
 import 'package:rent_a_bike/globals/bike_types.dart';
 import 'package:rent_a_bike/models/bike_model.dart';
 import 'package:rent_a_bike/models/dummy_data.dart';
+import 'package:rent_a_bike/pages/bike_details/bike_details.dart';
 
 class HomeTab extends ConsumerWidget {
   static const id = '/home_tab';
@@ -76,8 +77,8 @@ class HomeTab extends ConsumerWidget {
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
-                children: List.generate(
-                    popularBikes.length, (index) => popularBikeTile(index)),
+                children: List.generate(popularBikes.length,
+                    (index) => popularBikeTile(index, context)),
               ),
             ),
             const SizedBox(height: 20),
@@ -97,7 +98,7 @@ class HomeTab extends ConsumerWidget {
                   Column(
                     children: List.generate(
                       recentBikes.length,
-                      (index) => recentlyViewedBike(index),
+                      (index) => recentlyViewedBike(index, context),
                     ),
                   ),
                 ],
@@ -109,52 +110,60 @@ class HomeTab extends ConsumerWidget {
     );
   }
 
-  Widget popularBikeTile(int index) {
+  Widget popularBikeTile(int index, BuildContext context) {
     final populars = popularBikes.length;
     final bike = BikeModel.fromMap(popularBikes[index]);
-    return Container(
-      width: 160,
-      height: 280,
-      padding: const EdgeInsets.symmetric(vertical: 10),
-      margin: EdgeInsets.only(
-          left: index == 0 ? 20 : 10, right: index == populars - 1 ? 20 : 0),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: MyColors.grey3),
+    return GestureDetector(
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => BikeDetailsPage(bike: bike),
+        ),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            child: Image.asset(
-              bike.thumbnailPath,
-              fit: BoxFit.contain,
+      child: Container(
+        width: 160,
+        height: 280,
+        padding: const EdgeInsets.symmetric(vertical: 10),
+        margin: EdgeInsets.only(
+            left: index == 0 ? 20 : 10, right: index == populars - 1 ? 20 : 0),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: MyColors.grey3),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Image.asset(
+                bike.thumbnailPath,
+                fit: BoxFit.contain,
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text(bike.series, style: MyStyles.h2),
-                Text(
-                  bike.company,
-                  style: MyStyles.h3Normal,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text("${bike.rent}/", style: MyStyles.h3),
-                    Text(" per day", style: MyStyles.h3Normal),
-                  ],
-                ),
-              ],
-            ),
-          )
-        ],
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(bike.series, style: MyStyles.h2),
+                  Text(
+                    bike.company,
+                    style: MyStyles.h3Normal,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text("${bike.rent}/", style: MyStyles.h3),
+                      Text(" per day", style: MyStyles.h3Normal),
+                    ],
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -230,88 +239,96 @@ class HomeTab extends ConsumerWidget {
     );
   }
 
-  Widget recentlyViewedBike(int index) {
+  Widget recentlyViewedBike(int index, BuildContext context) {
     final bike = BikeModel.fromMap(recentBikes[index]);
     final available = bike.available;
-    return Container(
-      height: 60,
-      padding: const EdgeInsets.symmetric(
-        horizontal: 16,
-      ),
-      margin: const EdgeInsets.only(bottom: 16),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(
-          color: MyColors.grey3,
+    return GestureDetector(
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => BikeDetailsPage(bike: bike),
         ),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                height: 40,
-                width: 60,
-                padding: const EdgeInsets.symmetric(
-                  vertical: 2,
-                  horizontal: 2,
-                ),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    border: Border.all(
-                      color: MyColors.grey3,
-                    )),
-                child: Image.asset(
-                  bike.imagePath,
-                ),
-              ),
-              const SizedBox(width: 5),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    bike.series,
-                    style: MyStyles.h3.copyWith(height: 0.95),
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        '${bike.rent}/',
-                        style: GoogleFonts.risque(
-                          textStyle: MyStyles.h3Normal,
-                          height: 1,
-                        ),
-                      ),
-                      Text(
-                        'per day',
-                        style: MyStyles.h3Normal.copyWith(
-                          height: 1,
-                        ),
-                      ),
-                    ],
-                  )
-                ],
-              )
-            ],
+      child: Container(
+        height: 60,
+        padding: const EdgeInsets.symmetric(
+          horizontal: 16,
+        ),
+        margin: const EdgeInsets.only(bottom: 16),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(
+            color: MyColors.grey3,
           ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-            decoration: BoxDecoration(
-              color: available ? MyColors.blackColor : MyColors.grey3,
-              borderRadius: BorderRadius.circular(5),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  height: 40,
+                  width: 60,
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 2,
+                    horizontal: 2,
+                  ),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      border: Border.all(
+                        color: MyColors.grey3,
+                      )),
+                  child: Image.asset(
+                    bike.imagePath,
+                  ),
+                ),
+                const SizedBox(width: 5),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      bike.series,
+                      style: MyStyles.h3.copyWith(height: 0.95),
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          '${bike.rent}/',
+                          style: GoogleFonts.risque(
+                            textStyle: MyStyles.h3Normal,
+                            height: 1,
+                          ),
+                        ),
+                        Text(
+                          'per day',
+                          style: MyStyles.h3Normal.copyWith(
+                            height: 1,
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                )
+              ],
             ),
-            child: Text(
-              available ? "Available" : "Booked",
-              style: MyStyles.h4Normal.copyWith(
-                color: available ? MyColors.whiteColor : MyColors.blackColor,
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+              decoration: BoxDecoration(
+                color: available ? MyColors.blackColor : MyColors.grey3,
+                borderRadius: BorderRadius.circular(5),
               ),
-            ),
-          )
-        ],
+              child: Text(
+                available ? "Available" : "Booked",
+                style: MyStyles.h4Normal.copyWith(
+                  color: available ? MyColors.whiteColor : MyColors.blackColor,
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
