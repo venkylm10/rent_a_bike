@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rent_a_bike/constants/colors.dart';
 import 'package:rent_a_bike/constants/styles.dart';
-import 'package:rent_a_bike/main.dart';
 import 'package:rent_a_bike/models/bike_model.dart';
 import 'package:rent_a_bike/models/dummy_data.dart';
 import 'package:rent_a_bike/pages/checkout/checkout.dart';
@@ -16,6 +15,7 @@ class BikeDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: MyColors.backgroundColor,
       appBar: customAppBar('Bike Details'),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
@@ -45,7 +45,7 @@ class BikeDetailsPage extends StatelessWidget {
                           ),
                           Text(
                             bike.series,
-                            style: MyStyles.h2,
+                            style: MyStyles.h2.copyWith(height: 0.8),
                           ),
                           const SizedBox(height: 20),
                           specCard('Category', bike.category),
@@ -71,9 +71,12 @@ class BikeDetailsPage extends StatelessWidget {
                               color: MyColors.grey2,
                               borderRadius: BorderRadius.circular(20),
                             ),
-                            child: Image.asset(
-                              bike.imagePath,
-                              fit: BoxFit.fitWidth,
+                            child: Transform.translate(
+                              offset: const Offset(20, 0),
+                              child: Image.asset(
+                                bike.imagePath,
+                                fit: BoxFit.fitWidth,
+                              ),
                             ),
                           ),
                           const SizedBox(height: 20),

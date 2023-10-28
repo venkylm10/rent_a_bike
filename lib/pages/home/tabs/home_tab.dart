@@ -155,7 +155,10 @@ class HomeTab extends ConsumerWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text("${bike.rent}/", style: MyStyles.h3),
+                      Text(
+                        "${bike.rent}/",
+                        style: GoogleFonts.risque(textStyle: MyStyles.h3),
+                      ),
                       Text(" per day", style: MyStyles.h3Normal),
                     ],
                   ),
@@ -228,9 +231,9 @@ class HomeTab extends ConsumerWidget {
               child: Center(
             child: Text(
               "Search Bike",
-              style: MyStyles.h3.copyWith(
+              style: MyStyles.h2Normal.copyWith(
                 color: MyColors.grey3,
-                fontWeight: FontWeight.normal,
+                fontWeight: FontWeight.w500,
               ),
             ),
           ))

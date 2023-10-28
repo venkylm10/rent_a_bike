@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:rent_a_bike/constants/colors.dart';
 import 'package:rent_a_bike/pages/home/home.dart';
 import 'package:rent_a_bike/routes.dart';
 
@@ -19,9 +20,15 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
+        textSelectionTheme: TextSelectionThemeData(
+          cursorColor: MyColors.grey3,
+          selectionHandleColor: MyColors.grey3,
+          selectionColor: MyColors.grey2.withOpacity(
+            0.4,
+          ),
+        ),
       ),
       home: const HomePage(),
-      routes: routes,
     );
   }
 }
