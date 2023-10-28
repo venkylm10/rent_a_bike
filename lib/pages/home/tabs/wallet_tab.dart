@@ -9,7 +9,7 @@ class WalletTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: MyColors.backgroundColor,
-      appBar: customAppBar("Wallet"),
+      appBar: customAppBar("Wallet", showback: false),
     );
   }
 }

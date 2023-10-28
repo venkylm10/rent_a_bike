@@ -9,7 +9,7 @@ class MapTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: MyColors.backgroundColor,
-      appBar: customAppBar("Map"),
+      appBar: customAppBar("Map", showback: false),
     );
   }
 }

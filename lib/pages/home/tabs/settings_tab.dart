@@ -9,7 +9,7 @@ class SettingsTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: MyColors.backgroundColor,
-      appBar: customAppBar("Settings"),
+      appBar: customAppBar("Settings", showback: false),
     );
   }
 }
